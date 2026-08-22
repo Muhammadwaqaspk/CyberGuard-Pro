@@ -9,7 +9,6 @@ jobs:
   build-windows:
     runs-on: windows-latest
     
-    # <-- Yahan permissions block add kiya hai -->
     permissions:
       contents: write
 
@@ -37,7 +36,7 @@ jobs:
         print('ICO created')
         "
 
-   - name: Build EXE with PyInstaller
+    - name: Build App with PyInstaller (onedir)
       run: |
         pyinstaller `
           --onedir `
@@ -50,10 +49,10 @@ jobs:
           --add-data "assets\HOW_TO_USE.txt;." `
           src\cyberguard_pro.py
 
-    - name: Verify EXE built
+    - name: Verify Build Output
       run: |
-        dir "dist\CyberGuard Pro.exe"
-        echo "EXE built successfully"
+        dir "dist\CyberGuard Pro\CyberGuard Pro.exe"
+        echo "Build folder created successfully"
 
     - name: Setup WiX Toolset v4
       run: |
@@ -74,13 +73,12 @@ jobs:
       run: |
         dir dist\
 
-    - name: Upload MSI Installer
+    - name: Upload Installer Artifact
       uses: actions/upload-artifact@v4
       with:
         name: CyberGuard-Pro-Installer
         path: |
           dist\CyberGuard_Pro_Setup.msi
-          dist\CyberGuard Pro.exe
         retention-days: 30
 
     - name: Create Release
@@ -102,7 +100,6 @@ jobs:
           - Internet connection for AI features
         files: |
           dist\CyberGuard_Pro_Setup.msi
-          dist\CyberGuard Pro.exe
         draft: false
         prerelease: false
       env:
