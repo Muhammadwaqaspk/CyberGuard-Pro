@@ -9,6 +9,10 @@ jobs:
   build-windows:
     runs-on: windows-latest
     
+    # <-- Yahan permissions block add kiya hai -->
+    permissions:
+      contents: write
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
