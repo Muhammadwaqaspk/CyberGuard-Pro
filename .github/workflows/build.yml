@@ -36,10 +36,10 @@ jobs:
         print('ICO created')
         "
 
-    - name: Build App with PyInstaller (onedir)
+    - name: Build EXE with PyInstaller
       run: |
         pyinstaller `
-          --onedir `
+          --onefile `
           --windowed `
           --name "CyberGuard Pro" `
           --icon "assets\cyberguard.ico" `
@@ -49,10 +49,10 @@ jobs:
           --add-data "assets\HOW_TO_USE.txt;." `
           src\cyberguard_pro.py
 
-    - name: Verify Build Output
+    - name: Verify EXE built
       run: |
-        dir "dist\CyberGuard Pro\CyberGuard Pro.exe"
-        echo "Build folder created successfully"
+        dir "dist\CyberGuard Pro.exe"
+        echo "EXE built successfully"
 
     - name: Setup WiX Toolset v4
       run: |
