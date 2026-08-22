@@ -1,0 +1,105 @@
+name: Build CyberGuard Pro Installer
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install Python dependencies
+      run: |
+        pip install pyinstaller pillow --upgrade
+
+    - name: Convert logo to ICO
+      run: |
+        python -c "
+        from PIL import Image
+        img = Image.open('assets/logo.png').convert('RGBA')
+        sizes = [16,24,32,48,64,128,256]
+        imgs = [img.resize((s,s), Image.LANCZOS) for s in sizes]
+        imgs[0].save('assets/cyberguard.ico', format='ICO', sizes=[(s,s) for s in sizes], append_images=imgs[1:])
+        print('ICO created')
+        "
+
+    - name: Build EXE with PyInstaller
+      run: |
+        pyinstaller `
+          --onefile `
+          --windowed `
+          --name "CyberGuard Pro" `
+          --icon "assets\cyberguard.ico" `
+          --add-data "assets\cyberguard.ico;." `
+          --add-data "assets\logo.png;." `
+          --add-data "assets\CyberGuard_Demo.mp4;." `
+          --add-data "assets\HOW_TO_USE.txt;." `
+          src\cyberguard_pro.py
+
+    - name: Verify EXE built
+      run: |
+        dir "dist\CyberGuard Pro.exe"
+        echo "EXE built successfully"
+
+    - name: Setup WiX Toolset v4
+      run: |
+        dotnet tool install --global wix --version 4.0.5
+        wix --version
+
+    - name: Add WiX UI extension
+      run: |
+        wix extension add WixToolset.UI.wixext/4.0.5
+
+    - name: Build MSI Installer
+      run: |
+        wix build Product.wxs `
+          -ext WixToolset.UI.wixext `
+          -o "dist\CyberGuard_Pro_Setup.msi"
+
+    - name: List output files
+      run: |
+        dir dist\
+
+    - name: Upload MSI Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: CyberGuard-Pro-Installer
+        path: |
+          dist\CyberGuard_Pro_Setup.msi
+          dist\CyberGuard Pro.exe
+        retention-days: 30
+
+    - name: Create Release
+      if: github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v1.0.${{ github.run_number }}
+        name: CyberGuard Pro v1.0.${{ github.run_number }}
+        body: |
+          ## CyberGuard Pro - Windows Security Assistant
+          
+          ### Installation
+          1. Download `CyberGuard_Pro_Setup.msi`
+          2. Double-click to install
+          3. Desktop shortcut will be created automatically
+          
+          ### Requirements
+          - Windows 10 or Windows 11 (64-bit)
+          - Internet connection for AI features
+        files: |
+          dist\CyberGuard_Pro_Setup.msi
+          dist\CyberGuard Pro.exe
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
