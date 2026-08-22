@@ -1,0 +1,172 @@
+==============================================================
+   CYBERGUARD PRO v1.0
+   Windows Security Assistant
+   User Guide
+==============================================================
+
+CONTENTS
+  1. Getting Started - API Key Setup
+  2. Chat Assistant Tab
+  3. Quick Tools Tab
+  4. Website Scanner Tab
+  5. Settings Tab
+  6. Running Commands
+  7. FAQ
+
+--------------------------------------------------------------
+  1. GETTING STARTED - API KEY SETUP
+--------------------------------------------------------------
+
+Before using AI features, you need a free Anthropic API key.
+
+  Step 1: Open your browser and go to:
+          console.anthropic.com
+
+  Step 2: Click "Sign Up" and create a free account.
+
+  Step 3: Click "API Keys" in the left sidebar.
+
+  Step 4: Click "+ Create Key", name it "CyberGuard",
+          then click "Copy".
+
+  Step 5: Open CyberGuard Pro, go to Settings tab,
+          paste the key and click "Save Key".
+
+Your key is saved locally. You never need to enter it again.
+
+NOTE: Add a small credit ($5) at console.anthropic.com
+under "Credits" for uninterrupted AI usage.
+
+--------------------------------------------------------------
+  2. CHAT ASSISTANT TAB
+--------------------------------------------------------------
+
+Ask anything about your Windows security. The AI replies
+with explanations and exact commands.
+
+QUICK ACTION BUTTONS:
+
+  Full Security Scan     - Complete Windows security audit
+  Network Analysis       - Open ports and connections check
+  Threat Detection       - Malware and suspicious process scan
+  Firewall Hardening     - Review and improve firewall rules
+  User Account Audit     - Check all accounts and privileges
+  Event Log Analysis     - Find failed logins and attacks
+  Website Security Scan  - Scan any website for issues
+  Patch and Update Check - Find missing security updates
+
+THREAT STATUS (top right):
+  SECURE   - No threats detected
+  CAUTION  - Warnings found, review recommended
+  AT RISK  - Critical threat, act immediately
+
+--------------------------------------------------------------
+  3. QUICK TOOLS TAB
+--------------------------------------------------------------
+
+One-click Windows security commands. No typing needed.
+
+  Open Ports           Shows all ports listening on your PC
+  Active Connections   Shows all current network connections
+  Running Processes    Top processes sorted by CPU usage
+  Startup Programs     Programs that run when Windows starts
+  All User Accounts    Every user account on this PC
+  Admin Accounts       Accounts with administrator rights
+  Firewall Status      Current firewall profile settings
+  Firewall Rules       Active allow and block rules
+  Windows Updates      Recently installed security patches
+  Shared Folders       Network shares configured on this PC
+  Disk Usage           Storage space on all drives
+  Recent Logins        Last successful Windows logins
+  Failed Logins        Recent failed login attempts
+  Scheduled Tasks      Currently running scheduled tasks
+  System Info          OS version and hardware details
+  DNS Cache            Recently visited domain names
+  ARP Table            Devices on your local network
+  Routing Table        Network routing configuration
+  Network Adapters     All network cards and their status
+
+After running any tool, click "Analyze with AI" to send
+the output to the chatbot for full AI analysis.
+
+--------------------------------------------------------------
+  4. WEBSITE SCANNER TAB
+--------------------------------------------------------------
+
+Scan any website for security issues - no extra tools needed.
+
+  How to use:
+    1. Type a URL in the box (e.g. example.com)
+    2. Press Enter or click Scan
+    3. Wait a few seconds for results
+
+  What gets checked:
+    DNS Lookup          Server IP address resolution
+    Port Scan           14 common ports checked
+    SSL Certificate     HTTPS certificate validity and expiry
+    Security Headers    7 important HTTP security headers
+    robots.txt          Exposed paths and configurations
+
+  After scanning, click "Analyze with AI" for a full
+  explanation of all risks and how to fix them.
+
+--------------------------------------------------------------
+  5. SETTINGS TAB
+--------------------------------------------------------------
+
+  API Key box    Paste your Anthropic API key here
+  Show checkbox  Toggle to show or hide key characters
+  Save Key       Saves key permanently to your PC
+  Clear Key      Removes saved key from your PC
+
+  Key is stored at: C:\Users\YourName\.cyberguard_pro
+  It is never sent anywhere except the Anthropic API
+  when you send a chat message.
+
+--------------------------------------------------------------
+  6. RUNNING COMMANDS
+--------------------------------------------------------------
+
+When the AI gives you a PowerShell or CMD command:
+
+  1. Click the Copy button next to the command.
+  2. Press Windows + X and choose Terminal (Admin)
+     or Windows PowerShell (Admin).
+  3. Paste the command and press Enter.
+  4. Copy the output and paste it back into the chat.
+  5. The AI will analyze results and tell you what to do.
+
+--------------------------------------------------------------
+  7. FREQUENTLY ASKED QUESTIONS
+--------------------------------------------------------------
+
+Q: Chatbot shows "Connection error". What do I do?
+A: Check your internet. Go to Settings and verify
+   your API key starts with "sk-ant-".
+
+Q: Quick Tool shows a PowerShell error.
+A: Right-click CyberGuard Pro and choose
+   "Run as Administrator".
+
+Q: How much does the API key cost?
+A: Free credits on signup. $5 credit lasts a long time
+   for regular security scanning use.
+
+Q: Is my data safe?
+A: Yes. Only your chat text goes to Anthropic for AI
+   replies. Scan results stay on your PC unless you
+   paste them into chat yourself.
+
+Q: Can I scan someone else's website?
+A: Only scan systems you own or have written permission
+   to test. Unauthorized scanning is illegal.
+
+Q: How do I uninstall?
+A: Windows Settings > Apps > CyberGuard Pro > Uninstall
+   Or use the Start Menu uninstall shortcut.
+
+==============================================================
+   CyberGuard Pro v1.0
+   Copyright 2026 CyberGuard Security
+   All rights reserved.
+==============================================================

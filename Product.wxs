@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <Package
+    Name="CyberGuard Pro"
+    Manufacturer="CyberGuard Security"
+    Version="1.0.0.0"
+    UpgradeCode="A1B2C3D4-E5F6-7890-ABCD-EF1234567890"
+    Language="1033"
+    Codepage="1252"
+    InstallerVersion="500">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of CyberGuard Pro is already installed." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <Icon Id="CyberGuardIcon" SourceFile="assets\cyberguard.ico" />
+    <Property Id="ARPPRODUCTICON"  Value="CyberGuardIcon" />
+    <Property Id="ARPNOREPAIR"     Value="1" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+
+    <ui:WixUI Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUILicenseRtf" Value="assets\license.rtf" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="CyberGuard Pro" />
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder" />
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="StartMenuDir" Name="CyberGuard Pro" />
+    </StandardDirectory>
+
+    <ComponentGroup Id="AppFiles" Directory="INSTALLFOLDER">
+
+      <Component Id="MainEXE" Guid="B1C2D3E4-F5A6-7890-BCDE-F12345678901">
+        <File Id="CyberGuardExe"
+              Source="dist\CyberGuard Pro.exe"
+              Name="CyberGuard Pro.exe"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="AppIcon" Guid="C2D3E4F5-A6B7-8901-CDEF-123456789012">
+        <File Id="AppIconFile"
+              Source="assets\cyberguard.ico"
+              Name="cyberguard.ico"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="AppLogo" Guid="D3E4F5A6-B7C8-9012-DEF0-234567890123">
+        <File Id="LogoFile"
+              Source="assets\logo.png"
+              Name="logo.png"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="DemoVideo" Guid="E4F5A6B7-C8D9-0123-EF01-345678901234">
+        <File Id="DemoVideoFile"
+              Source="assets\CyberGuard_Demo.mp4"
+              Name="CyberGuard_Demo.mp4"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="UserGuide" Guid="F5A6B7C8-D9E0-1234-F012-456789012345">
+        <File Id="UserGuideFile"
+              Source="assets\HOW_TO_USE.txt"
+              Name="HOW_TO_USE.txt"
+              KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+
+    <ComponentGroup Id="Shortcuts" Directory="DesktopFolder">
+      <Component Id="DesktopSC" Guid="A6B7C8D9-E0F1-2345-0123-567890123456">
+        <Shortcut Id="DesktopShortcut"
+                  Name="CyberGuard Pro"
+                  Description="Windows Security Assistant"
+                  Target="[INSTALLFOLDER]CyberGuard Pro.exe"
+                  Icon="CyberGuardIcon"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\CyberGuardPro"
+                       Name="DesktopShortcut"
+                       Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="StartMenu" Directory="StartMenuDir">
+      <Component Id="StartMenuSC" Guid="B7C8D9E0-F1A2-3456-1234-678901234567">
+        <Shortcut Id="StartApp"
+                  Name="CyberGuard Pro"
+                  Description="Windows Security Assistant"
+                  Target="[INSTALLFOLDER]CyberGuard Pro.exe"
+                  Icon="CyberGuardIcon"
+                  WorkingDirectory="INSTALLFOLDER" />
+        <Shortcut Id="StartGuide"
+                  Name="How To Use CyberGuard Pro"
+                  Target="[INSTALLFOLDER]HOW_TO_USE.txt" />
+        <Shortcut Id="StartUninstall"
+                  Name="Uninstall CyberGuard Pro"
+                  Target="[SystemFolder]msiexec.exe"
+                  Arguments="/x [ProductCode]" />
+        <RemoveFolder Id="CleanMenu" On="uninstall" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\CyberGuardPro"
+                       Name="StartMenu"
+                       Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <Feature Id="Complete" Title="CyberGuard Pro" Level="1">
+      <ComponentGroupRef Id="AppFiles" />
+      <ComponentGroupRef Id="Shortcuts" />
+      <ComponentGroupRef Id="StartMenu" />
+    </Feature>
+
+  </Package>
+</Wix>
