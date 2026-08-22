@@ -37,10 +37,10 @@ jobs:
         print('ICO created')
         "
 
-    - name: Build EXE with PyInstaller
+   - name: Build EXE with PyInstaller
       run: |
         pyinstaller `
-          --onefile `
+          --onedir `
           --windowed `
           --name "CyberGuard Pro" `
           --icon "assets\cyberguard.ico" `
